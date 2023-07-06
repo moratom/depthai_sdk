@@ -4,6 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--recordStreams', action='store_true', help="Record frames to file")
+parser.add_argument('--saveStreamsTo', type=str, help="Save frames to directory", default="./record")
 args= ArgsParser.parseArgs(parser=parser)
 
 with OakCamera(args=args) as oak:
@@ -26,7 +27,7 @@ with OakCamera(args=args) as oak:
         oak.visualize(stereo)
     # Sync & save all streams
     if args["recordStreams"]:
-        oak.record(cams_isp, './record', RecordType.VIDEO)
+        oak.record(cams_isp, args["saveStreamsTo"], RecordType.VIDEO)
     oak.visualize(cams_isp, fps=True)
 
     oak.start(blocking=True)
