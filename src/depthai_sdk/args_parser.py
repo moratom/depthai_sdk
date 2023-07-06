@@ -92,7 +92,7 @@ class ArgsParser:
         parser.add_argument("-monof", "--monoFps", type=float,
                             help="Mono cam fps: max 60.0 for H:720 or H:800, max 120.0 for H:400. Default: %(default)s")
         parser.add_argument('-fps', '--fps', type=float, help='Camera FPS applied to all sensors')
-        parser.add_argument('-defaultRes', '--defaultResolution', type=str, choices=['min', 'mid', 'max'], default='mid',
+        parser.add_argument('-defaultRes', '--defaultResolution', type=str, choices=[None, 'min', 'max'],
                             help="Default resolution preset for the cameras that don't have a specific resolution set. Default: %(default)s")
         # ColorCamera ISP values
         parser.add_argument('-isp', '--ispScale', type=_commaSeparated(None), help="Sets ColorCamera's ISP scale")

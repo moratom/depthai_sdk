@@ -1,5 +1,4 @@
 from depthai_sdk import OakCamera, RecordType
-import depthai as dai
 
 with OakCamera() as oak:
     cams = oak.create_all_cameras()
