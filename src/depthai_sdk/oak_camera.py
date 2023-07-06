@@ -75,15 +75,15 @@ class OakCamera:
         if args:
             if isinstance(args, bool):
                 self._args = ArgsParser.parseArgs()
-                # Set up the OakCamera
-                if self._args.get('recording', None):
-                    replay = self._args.get('recording', None)
-                if self._args.get('deviceId', None):
-                    device = self._args.get('deviceId', None)
-                if self._args.get('usbSpeed', None):
-                    usb_speed = parse_usb_speed(self._args.get('usbSpeed', None))
             else:  # Already parsed
                 self._args = args
+            # Set up the OakCamera
+            if self._args.get('recording', None):
+                replay = self._args.get('recording', None)
+            if self._args.get('deviceId', None):
+                device = self._args.get('deviceId', None)
+            if self._args.get('usbSpeed', None):
+                usb_speed = parse_usb_speed(self._args.get('usbSpeed', None))
 
         if config is None:
             config = dai.Device.Config()

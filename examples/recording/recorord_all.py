@@ -1,6 +1,12 @@
 from depthai_sdk import OakCamera, RecordType
+from depthai_sdk.args_parser import ArgsParser
+import argparse
 
-with OakCamera() as oak:
+parser = argparse.ArgumentParser()
+parser.add_argument('--recordStreams', action='store_true', help="Record frames to file")
+args= ArgsParser.parseArgs(parser=parser)
+
+with OakCamera(args=args) as oak:
     cams = oak.create_all_cameras()
     cams_isp = [cam.out.isp for cam in cams]
     leftSocket = oak.calibration.getStereoLeftCameraId()
@@ -19,7 +25,8 @@ with OakCamera() as oak:
         stereo = oak.create_stereo(left=leftCam, right=rightCam)
         oak.visualize(stereo)
     # Sync & save all streams
-    oak.record(cams_isp, './record', RecordType.VIDEO)
+    if args["recordStreams"]:
+        oak.record(cams_isp, './record', RecordType.VIDEO)
     oak.visualize(cams_isp, fps=True)
 
     oak.start(blocking=True)
